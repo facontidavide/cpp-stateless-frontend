@@ -21,6 +21,7 @@
 #include <map>
 #include <memory>
 #include <set>
+#include <iostream>
 #include <type_traits>
 #include <vector>
 
@@ -238,12 +239,12 @@ private:
       return result;
     }
 
-    for (auto& candidate : candidates->second)
+    for (const auto& candidate : candidates->second)
     {
       if (candidate->is_condition_met())
       {
         if (result != nullptr)
-        {
+        {           
           throw error(
             "Multiple permitted exit transitions are "
             "configured from the current state. Guard "

@@ -80,6 +80,7 @@ public:
       .permit(trigger::halt, state::idle);
 
     sm_.configure(state::started)
+      .on_entry( [](const TTransition& ){ std::cout << "--started--" << std::endl;} )
       .permit(trigger::set_speed, state::running)
       .permit(trigger::stop, state::stopped);
 

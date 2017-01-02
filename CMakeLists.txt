@@ -20,17 +20,6 @@ project(stateless++)
 
 enable_testing()
 
-if (CYGWIN AND "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  include_directories(BEFORE SYSTEM /usr/lib/gcc/i686-pc-cygwin/4.7.2/include/c++)
-  include_directories(BEFORE SYSTEM /usr/lib/gcc/i686-pc-cygwin/4.7.2/include/c++/i686-pc-cygwin)
-  include_directories(BEFORE SYSTEM /usr/lib/gcc/i686-pc-cygwin/4.7.2/include/c++/backward)
-  include_directories(BEFORE SYSTEM /usr/lib/gcc/i686-pc-cygwin/4.7.2/include)
-  include_directories(BEFORE SYSTEM /usr/lib/gcc/i686-pc-cygwin/4.7.2/include-fixed)
-endif (CYGWIN AND "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux" AND ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
-  include_directories(BEFORE SYSTEM /usr/include/x86_64-linux-gnu/c++/4.7)
-endif (${CMAKE_SYSTEM_NAME} STREQUAL "Linux" AND ${CMAKE_CXX_COMPILER_ID} STREQUAL "Clang")
 message(STATUS "CMAKE_CXX_FLAGS_RELWITHDEBINFO = " ${CMAKE_CXX_FLAGS_RELWITHDEBINFO})
 message(STATUS "CMAKE_BUILD_TYPE = " ${CMAKE_BUILD_TYPE})
 

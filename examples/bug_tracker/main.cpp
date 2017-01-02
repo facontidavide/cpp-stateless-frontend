@@ -23,7 +23,7 @@ using namespace bug_tracker_example;
 
 int main(int argc, char* argv[])
 {
-  bug bug("Incorrect stock count");
+  Bug bug("Incorrect stock count");
 
   bug.assign("Joe");
   bug.defer();

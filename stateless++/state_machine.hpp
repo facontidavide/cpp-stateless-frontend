@@ -22,6 +22,8 @@
 #include <memory>
 #include <set>
 #include <sstream>
+#include <deque>
+#include <iostream>
 
 #include "print_state.hpp"
 #include "print_trigger.hpp"
@@ -123,6 +125,19 @@ public:
   void fire(const TTrigger& trigger)
   {
     internal_fire(trigger);
+  }
+
+  void push_deferred_trigger(const TTrigger& trigger)
+  {
+    deferred_triggers_.push_back(trigger);
+  }
+
+  bool pop_deferred_trigger()
+  {
+      if( deferred_triggers_.size() == 0) return false;
+      fire( deferred_triggers_.front());
+      deferred_triggers_.pop_front();
+      return true;
   }
 
   /**
@@ -368,11 +383,11 @@ private:
       TTransition transition(source, destination, trigger);
       current_representation()->exit(transition);
       set_state(transition.destination());
-      current_representation()->enter(transition, args...);
       if (on_transition_)
       {
         on_transition_(transition);
       }
+      current_representation()->enter(transition, args...);
     }
   }
 
@@ -405,6 +420,8 @@ private:
 
   /// Mapping of triggers with arguments to the underlying trigger.
   std::map<TTrigger, TTriggerWithParameters> trigger_configuration_;
+
+  std::deque<TTrigger> deferred_triggers_;
 
   /// The state accessor.
   TStateAccessor state_accessor_;

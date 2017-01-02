@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Build stateless++ examples.
+# Build motor switch example.
 
-add_subdirectory(bug_tracker)
-add_subdirectory(motor)
-add_subdirectory(on_off)
-add_subdirectory(telephone_call)
-add_subdirectory(grasping)
+include_directories(${stateless++_SOURCE_DIR})
+
+add_executable(grasping main.cpp picking.h placing.h
+    state_machine.hpp
+    state_machine.cpp )
